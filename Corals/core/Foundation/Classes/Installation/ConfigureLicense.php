@@ -176,9 +176,8 @@ class ConfigureLicense
     {
         try {
             $client = new \GuzzleHttp\Client([
-                'defaults' => [
-                    'verify' => false
-                ],                 
+                'curl'   => array( CURLOPT_SSL_VERIFYPEER => false ),
+                'verify' => false  
             ]);
 
             $res = $client->request('GET', config('settings.models.module.updater_url'), [               
