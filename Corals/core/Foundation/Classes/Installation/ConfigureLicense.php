@@ -174,11 +174,13 @@ class ConfigureLicense
      */
     protected function LicenseIsValid($domain, $license)
     {
-        return true;
         try {
             $client = new \GuzzleHttp\Client();
 
             $res = $client->request('GET', config('settings.models.module.updater_url'), [
+                'defaults' => [
+                    'verify' => false
+                ],                
                 'query' => [
                     'license_key' => $license,
                     'domain' => $domain,
