@@ -815,7 +815,10 @@ class Modules
             $updater_url = config('settings.models.module.updater_url');
             $license_key = config('settings.models.module.license_key');
             try {
-                $client = new \GuzzleHttp\Client();
+                $client = new \GuzzleHttp\Client([
+                    'curl'   => array( CURLOPT_SSL_VERIFYPEER => false ),
+                    'verify' => false  
+                ]);
                 $res = $client->request('GET', $updater_url, [
                     'query' => [
                         'license_key' => $license_key,
@@ -867,7 +870,10 @@ class Modules
         $updater_url = config('settings.models.module.updater_url');
         $license_key = config('settings.models.module.license_key');
 
-        $client = new \GuzzleHttp\Client();
+        $client = new \GuzzleHttp\Client([
+            'curl'   => array( CURLOPT_SSL_VERIFYPEER => false ),
+            'verify' => false  
+        ]);
         $res = $client->request('GET', $updater_url, [
             'query' => [
                 'license_key' => $license_key,
