@@ -477,7 +477,7 @@ class Modules
             Actions::do_action('post_install_module', $module);
         } catch (\Exception $e) {
             report($e);
-            throw new \Exception(trans('Settings::exception.module.install_module_failed',
+            throw new \Exception(trans('Settings::exception.module.install_module_failed '.$e->getMessage(),
                 ['message_exception' => $e->getMessage()]));
         }
     }
@@ -872,7 +872,7 @@ class Modules
 
         $client = new \GuzzleHttp\Client([
             'curl'   => array( CURLOPT_SSL_VERIFYPEER => false ),
-            'verify' => false  
+            'verify' => false
         ]);
         $res = $client->request('GET', $updater_url, [
             'query' => [
